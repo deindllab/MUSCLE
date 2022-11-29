@@ -1,0 +1,177 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "F2CLIBS/libf2c/arithchk.exe"
+		},
+		{
+			"path" : "F2CLIBS/libf2c/arithchk.pdb"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_executable",
+			"set_target_properties",
+			"add_definitions",
+			"include_directories"
+		],
+		"files" : 
+		[
+			"F2CLIBS/libf2c/CMakeLists.txt",
+			"CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 41,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 45,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 57,
+				"parent" : 0
+			},
+			{
+				"file" : 1
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 44,
+				"parent" : 4
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 59,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 60,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "/DWIN32 /D_WINDOWS /W3  /wd4244 /wd4554 /wd4996 /MD /Zi /O2 /Ob1 /DNDEBUG"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"define" : "MSDOS"
+				},
+				{
+					"define" : "NO_BLAS_WRAP"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "NO_FPINIT"
+				},
+				{
+					"define" : "NO_ISATTY"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "NO_LONG_LONG"
+				},
+				{
+					"define" : "USE_CLOCK"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "_COMPLEX_DEFINED"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 5,
+					"path" : "D:/Google drive/smFRET_new/Data analysis soft/Matlab_MUSCLE/TwoTone/gaussFitTools1.0Release/GaussFitTools/clapack-3.2.1-CMAKE/INCLUDE"
+				},
+				{
+					"backtrace" : 6,
+					"path" : "D:/Google drive/smFRET_new/Data analysis soft/Matlab_MUSCLE/TwoTone/gaussFitTools1.0Release/GaussFitTools/clapack-3.2.1-CMAKE/F2CLIBS/libf2c"
+				},
+				{
+					"backtrace" : 7,
+					"path" : "D:/Google drive/smFRET_new/Data analysis soft/Matlab_MUSCLE/TwoTone/gaussFitTools1.0Release/GaussFitTools/clapack-3.2.1-CMAKE/out/build/x64-Release/F2CLIBS/libf2c"
+				}
+			],
+			"language" : "C",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"id" : "arithchk::@0f78d378a1effe48c0eb",
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "/DWIN32 /D_WINDOWS /W3  /wd4244 /wd4554 /wd4996 /MD /Zi /O2 /Ob1 /DNDEBUG",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "/machine:x64 /debug /INCREMENTAL /subsystem:console",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib",
+				"role" : "libraries"
+			}
+		],
+		"language" : "C"
+	},
+	"name" : "arithchk",
+	"nameOnDisk" : "arithchk.exe",
+	"paths" : 
+	{
+		"build" : "F2CLIBS/libf2c",
+		"source" : "F2CLIBS/libf2c"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "F2CLIBS/libf2c/arithchk.c",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "EXECUTABLE"
+}

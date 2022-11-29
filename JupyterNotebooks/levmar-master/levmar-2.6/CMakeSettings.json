@@ -1,0 +1,48 @@
+﻿{
+  "configurations": [
+    {
+      "name": "x64-Debug",
+      "generator": "Ninja",
+      "configurationType": "Debug",
+      "inheritEnvironments": [ "msvc_x64_x64" ],
+      "buildRoot": "${projectDir}\\out\\build\\${name}",
+      "installRoot": "${projectDir}\\out\\install\\${name}",
+      "cmakeCommandArgs": "",
+      "buildCommandArgs": "",
+      "ctestCommandArgs": ""
+    },
+    {
+      "name": "x64-Release",
+      "generator": "Ninja",
+      "configurationType": "RelWithDebInfo",
+      "buildRoot": "${projectDir}\\out\\build\\${name}",
+      "installRoot": "${projectDir}\\out\\install\\${name}",
+      "cmakeCommandArgs": "",
+      "buildCommandArgs": "",
+      "ctestCommandArgs": "",
+      "inheritEnvironments": [ "msvc_x64_x64" ],
+      "variables": [
+        {
+          "name": "BUILD_DEMO",
+          "value": "True",
+          "type": "BOOL"
+        },
+        {
+          "name": "LAPACKBLAS_DIR",
+          "value": "C:/Users/Anton/Documents/Jupyter home/MUSCLE/JupyterNotebooks/levmar-master/levmar-2.6",
+          "type": "PATH"
+        },
+        {
+          "name": "F2C_LIB_NAME",
+          "value": "libf2c",
+          "type": "STRING"
+        },
+        {
+          "name": "HAVE_PLASMA",
+          "value": "false",
+          "type": "BOOL"
+        }
+      ]
+    }
+  ]
+}
