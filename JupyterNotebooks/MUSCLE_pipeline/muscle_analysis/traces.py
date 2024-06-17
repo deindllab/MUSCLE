@@ -15,16 +15,17 @@ def extract_traces(path_smFRET, read2, rb_rad, r):
         path_smFRET - path to the folder containing the smFRET data. 
         read2 - indicator of paired-end sequencing
     Returns:
-        .mat file with following information 
+        rb_rad - rolling ball radius
+        r - Half-width of the molecule aperture for trace extraction, i.e. for r = 3 it is -3:3
       
-        "time": time ingormation from smFRET trace 
+        "time": time information from smFRET trace 
         "Cy3": Cy3 intensity 
         "Cy5": Cy5 intensity 
-        "Seq": sequence baser on the read1,
+        "Seq": sequence based on the read1,
         "Seq_2": sequence based on read2 (if not paired-end, it's an empty array),
-        "Dist": distance betweeen cluster and single molecule,
-        "x": x coordinate of single-molecules from the red channel,
-        "y": y coordinate of single-molecules from the red channel,
+        "Dist": distance betweeen a cluster and a single molecule,
+        "x": x coordinate of single molecules from the red channel,
+        "y": y coordinate of single molecules from the red channel,
         "x_FQ": x coordinate of respective cluster from the fastq file,
         "y_FQ": y coordinate of respective cluster from the fastq file
            
@@ -33,7 +34,7 @@ def extract_traces(path_smFRET, read2, rb_rad, r):
     
     """
     
-    file_path = fd.askopenfilename(title = "Choose the mat file") 
+    file_path = fd.askopenfilename(title = "Choose the good_pos.mat file") 
     mdict1 = loadmat(file_path)
     
     current_direct = fd.askdirectory(title = "Choose the output folder")
@@ -48,7 +49,7 @@ def extract_traces(path_smFRET, read2, rb_rad, r):
    # }
 
     # Extracting traces, median BG version
-    frame_rate = int(input("Please, choose the frame rate"))
+    frame_rate = int(input("Please, choose the frame rate(Hz) "))
     rb = int(rb_rad/2)  # Half-width of the background aperture for trace extraction 
     # (bacground is calculated as a median of intensities in a rectangular aperture between r and rb)
     # a = np.subtract(range(2*rb+1), rb)
@@ -189,4 +190,4 @@ def extract_traces(path_smFRET, read2, rb_rad, r):
         }
         
         savemat(os.path.join(current_direct, pos + "_traces.mat"), mdict)
-    
+        

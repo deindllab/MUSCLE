@@ -3,21 +3,19 @@ from skimage import transform
 import numpy as np
 import tkinter as tk
 from tkinter import messagebox
-root = tk.Tk()
-root.attributes("-topmost", True)
-root.withdraw()
+
 
 
 
 def poly_transf():
-    """This function is used for uploading the polynomial transformation which defines the relation between Green and Rd channels
+    """This function is used for uploading the polynomial transformation which defines the relation between Green and Red channels
 
     Args:
         base_path (string): The absolute path of the input files.
        
     Returns:
-        tr_G2R: forward transformation (it describes transformation from green to red channel)
-        tr_R2G: reverse transformation (it describes transformation from red to green channel).
+        tr_G2R: forward transformation (it describes transformation from green to red channel),
+        tr_R2G: reverse transformation (it describes transformation from red to green channel)
     """
     tr_G2R = transform.PolynomialTransform()
     file_path = fd.askopenfilename(title = "Choose the forward transform file (Green to Red)")
@@ -112,6 +110,7 @@ def extract_pos_info(POS, res = False):
 
         # Create the main window
         root = tk.Tk()
+        root.attributes("-topmost", True)
         root.title("Please enter X and Y displacement")
 
         # Create and place the labels and entry widgets

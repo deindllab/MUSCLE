@@ -52,8 +52,8 @@ def alignment (path_smFRET, POS, ALEX, tr_R2G, apriori_tr, x_coord, y_coord, seq
         read2: in case of paired-end sequencing, this flag should be True
     Returns:
          It returns the following parameteres which have been chosen here: 
-         #r - Half-width of the molecule aperture for trace extraction, i.e. for r = 3 it is -3:3
-         #rb_rad - radius for the ralling ball background estimation
+         r - Half-width of the molecule aperture for trace extraction, i.e. for r = 3 it is -3:3
+         rb_rad - radius for the rolling ball background estimation, default value is 10
          And creates .mat file with "good positions"
     
     """ 
@@ -83,7 +83,7 @@ def alignment (path_smFRET, POS, ALEX, tr_R2G, apriori_tr, x_coord, y_coord, seq
     FQ_shifts_pos = []
     matched_sequences_2 = []
     
-    rb_rad = int(input("Please enter the radius for the ralling ball background estimation"))
+    rb_rad = int(input("Please enter the radius for the rolling ball background estimation, put 10 as a default "))
     rb = int(rb_rad/2) # Half-width of the background aperture for trace extraction
     r = int(input("Please enter the half-width of the molecule aperture for trace extraction, , i.e. for r = 3 it is -3:3"))
     

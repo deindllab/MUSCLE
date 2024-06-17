@@ -202,7 +202,7 @@ def create_FASTQ_image (current_tile, read2):
        sequence - list of sequence, which has been choseb based on criteria. if read2 =True, it's 2D array
     """
    
-    fastq_path = fd.askopenfilename(title = "Choose the FASTQ file")
+    fastq_path = fd.askopenfilename(title = "Choose the Read1 FASTQ file")
     
     
     x_coord, y_coord, sequence_1 = get_seq_coordinates(fastq_path,  tile=current_tile)
