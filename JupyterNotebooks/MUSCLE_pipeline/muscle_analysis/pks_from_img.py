@@ -81,16 +81,16 @@ def count_nearest_pts(src, dst, radius):
     return res, idx
 
 def combined_image(path_smFRET, POS, ALEX, tr_R2G, apriori_tr_original):
-    """Creating the combined image from the sm_FRET FOV
+    """Creating the combined image from the sm_FRET FOVs
 
     Args:
-        path_smFRET: path to the folder with files.
+        path_smFRET: path to the folder with smFRET movies.
         POS: position list.
-        ALEX (bool): The regime of imaging.
-        tr_R2G: the polynomial reverse transformation
-        apriori_tr_original: original apriori transformation
+        ALEX (bool): was the data collected using alternating laser excitation (ALEX)?.
+        tr_R2G: the polynomial reverse transformation for mapping the Cy3 and Cy5 channels
+        apriori_tr_original: original apriori transformation from smFRET to sequencing coordinates
     Returns:
-        The function creates the combined image in the chosen folder
+        The function creates an image that combines all smFRET FOVs in order to perform preliminary alignment with FASTQ tiles
     """
     size1 = apriori_tr_original([[256,512]]).astype(int)
     labels, posX, posY  = load_data.extract_pos_info(POS) #from module load_data_extracting the coordinates and the label from the position, if False, then just extract, if True choose matching 
