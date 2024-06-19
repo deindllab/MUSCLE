@@ -220,7 +220,7 @@ def create_FASTQ_image (current_tile, read2):
     # Selecting the library sequences for further analysis, insert here the sequence of your library 
     # Hairpin library:
     library_seq =  'GGTCTCGTCCATGGCGACGGCAGCGAGGCGAATGGCGGTTAAAAAAAAAAAAAAAAATGCCCTCCACGAT' 
-    # Cas9_Ha library:    
+    # Cas9 library:    
     #library_seq =  'GGTCTCGCACAGCAGAAATCTCTACTGAGGTATAAAGATGAGACGCTGGAGTAAAAACGTTGGTTGGCT'
     
     idx = library_index(library_seq, sequence_1, 40)
