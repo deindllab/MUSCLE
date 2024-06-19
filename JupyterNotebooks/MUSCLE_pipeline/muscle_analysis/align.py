@@ -31,7 +31,7 @@ from scipy.io import savemat
 import itertools
 import scipy.spatial
 from skimage.restoration import rolling_ball
-from . import muscle_sequencing, pks_from_img, Polywarp, star, align, load_data
+from . import muscle_sequencing, pks_from_img, Polywarp, align, load_data
 root = tk.Tk()
 root.attributes("-topmost", True)
 root.withdraw()
@@ -54,7 +54,7 @@ def alignment (path_smFRET, POS, ALEX, tr_R2G, apriori_tr, x_coord, y_coord, seq
          It returns the following analysis parameters that can be adjusted in this file if needed: 
          r - Half-width of the molecule aperture for trace extraction, i.e. for r = 3 it is -3:3
          rb_rad - radius for the rolling ball background estimation, default value is 10
-         And creates .mat file with "good positions"
+         It creates .mat file with "good positions"
     
     """ 
     
