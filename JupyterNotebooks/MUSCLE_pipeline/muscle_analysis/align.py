@@ -38,20 +38,20 @@ root.withdraw()
 
 def alignment (path_smFRET, POS, ALEX, tr_R2G, apriori_tr, x_coord, y_coord, sequence, read2 ):
     """
-    The function is used for the alingment between single molecules from smFRET imaging and clusters from FASTQ file.
+    The function is used for the alingment between molecules from smFRET imaging and clusters from sequencing.
 
     Args:
-        path_smFRET (string): The absolute path of the folder with smFRET data.
-        POS: the information about positions. 
-        ALEX (boolean): If imaging was in ALEX regime.
-        tr_R2G : forward transformation 
-        apriori_tr: original transformation  
+        path_smFRET (string): The absolute path of the folder with smFRET movies.
+        POS: the information about FOV positions. 
+        ALEX (boolean): Was imaging performed with alternating laser excitation (ALEX)?.
+        tr_R2G : forward transformation mapping Cy3 and Cy5 channels
+        apriori_tr: a preliminary transformation from smFRET to sequencing coordinates
         x_coord: list of the x coordinates from the FASTQ file
         y_coord: list of the y coordinates from the FASTQ file
         sequence: list of the sequences from the FASTQ file, in case of paired-end sequencing, it is 2D array
         read2: in case of paired-end sequencing, this flag should be True
     Returns:
-         It returns the following parameteres which have been chosen here: 
+         It returns the following analysis parameters that can be adjusted in this file if needed: 
          r - Half-width of the molecule aperture for trace extraction, i.e. for r = 3 it is -3:3
          rb_rad - radius for the rolling ball background estimation, default value is 10
          And creates .mat file with "good positions"
