@@ -1,14 +1,7 @@
 !NOTE: all the codes were developed for Windows. Running them on other operating systems might require adjustments, e.g. for the different path naming conventions
 1. Preparation
-Python IDE installation 
-Jupyter notebook
-Firstly, install Anaconda (https://www.anaconda.com/download) by following the instructions on the webpage. Then launch the Jupiter notebook (or other IDE provided by Anaconda)
-
-Alternatively, PyCharm IDE can be used
 In order to run the codes, the following packages should be installed:
 os, cv2, tkinter, PIL, skimage, numpy, matplotlib, scipy, cmath, math, sys, json, copy, Bio, sklearn, itertools.
-Packages can be installed either through conda or pip, for example
-conda install numpy or pip3 install numpy
 2. Obtaining transformations
 Firstly, parameters of a few important transformations should be acquired. 
 Transformation which defines the relation between green and red channels. In order to obtain parameters for this transformation the following script can be used: “channel_map_512_2channels_v2.ipynb”. The input for this script is a few movies with fluorescent beads or other fiducial markers that are visible in both Cy3 and Cy5 channels should be used.
