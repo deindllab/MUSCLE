@@ -9,11 +9,11 @@ from scipy.io import savemat, loadmat
 
 def extract_traces(path_smFRET, read2, rb_rad, r):
     """
-    This function is creating the .mat files containing smFRET information about individual molecules from previously selected positions
+    This function is creating the .mat files containing matched smFRET traces and sequences for molecules from FOVs that were aligned in the previous step
 
     Args:
-        path_smFRET - path to the folder containing the smFRET data. 
-        read2 - indicator of paired-end sequencing
+        path_smFRET - path to the folder containing the smFRET movies. 
+        read2 - flag for paired-end sequencing
     Returns:
         rb_rad - rolling ball radius
         r - Half-width of the molecule aperture for trace extraction, i.e. for r = 3 it is -3:3
@@ -23,11 +23,11 @@ def extract_traces(path_smFRET, read2, rb_rad, r):
         "Cy5": Cy5 intensity 
         "Seq": sequence based on the read1,
         "Seq_2": sequence based on read2 (if not paired-end, it's an empty array),
-        "Dist": distance betweeen a cluster and a single molecule,
-        "x": x coordinate of single molecules from the red channel,
-        "y": y coordinate of single molecules from the red channel,
-        "x_FQ": x coordinate of respective cluster from the fastq file,
-        "y_FQ": y coordinate of respective cluster from the fastq file
+        "Dist": distance betweeen a cluster and a corresponding single molecule,
+        "x": x coordinates of single molecules from the Cy5 channel,
+        "y": y coordinates of single molecules from the Cy5 channel,
+        "x_FQ": x coordinates of respective clusters from the fastq file,
+        "y_FQ": y coordinates of respective clusters from the fastq file
            
           
     
