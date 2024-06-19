@@ -193,13 +193,13 @@ def create_FASTQ_image (current_tile, read2):
     """This function is used for creating the image based on FASTQ file. 
 
     Args:
-        current tile(integer): number of a current tile
+        current tile(integer): number of the current tile
         read2(boolean):  in case of paired-end sequencing, this flag should be True
     Returns:
        Creates the fastq image 
        x_coord - x coordinates from the Fastq file 
        y_coord - y coordinates from the Fastq file
-       sequence - list of sequence, which has been choseb based on criteria. if read2 =True, it's 2D array
+       sequence - list of selected sequences. if read2 =True, it's a 2D array
     """
    
     fastq_path = fd.askopenfilename(title = "Choose the Read1 FASTQ file")
