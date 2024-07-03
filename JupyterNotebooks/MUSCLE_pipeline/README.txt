@@ -13,6 +13,7 @@ A preliminary similarity transformation between smFRET and FASTQ coordinates is 
 3. Pipeline usage
 Copy the folder “MUSCLE_pipeline” with the library and example (Muscle_data_analysis.ipynb). Note that the latest version of the pipeline can be found at https://github.com/deindllab/MUSCLE.
 Here you can find the detailed description of the pipeline, steps’s headers are identical to headers of the cells in Muscle_data_analysis.ipynb: 
+! In muscle_sequencing.py find function create_FASTQ_image and change the variable library_seq according to your library sequence.  
 0. Import of packages 
  Import all the packages (cell 1 of the example script)
 

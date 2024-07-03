@@ -64,8 +64,8 @@ def alignment (path_smFRET, POS, ALEX, tr_R2G, apriori_tr, x_coord, y_coord, seq
     else:
         sequence_1 = sequence
    
-    print (len(sequence_1))
-    print (len(sequence_2))
+    #print (len(sequence_1))
+    #print (len(sequence_2))
     if ALEX:
         green_frames = np.add(1,np.multiply(2,range(10)))
         red_frames = np.subtract(green_frames,1)
