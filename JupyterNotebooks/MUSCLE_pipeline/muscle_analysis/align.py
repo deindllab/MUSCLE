@@ -212,7 +212,7 @@ def alignment (path_smFRET, POS, ALEX, tr_R2G, apriori_tr, x_coord, y_coord, seq
             image_smFRET_tr = Image.fromarray(fastq_image_lib_array)
             image_smFRET_tr.save(os.path.join(pos_direct, pos + "_FQ_peaks.tif"))
 
-            shift = phase_cross_correlation(fastq_image_lib_array,smFRET_centers_tr_image_array)
+            shift = phase_cross_correlation(fastq_image_lib_array,smFRET_centers_tr_image_array, upsample_factor=100)
             shift = shift[0]
             print(shift)
 
