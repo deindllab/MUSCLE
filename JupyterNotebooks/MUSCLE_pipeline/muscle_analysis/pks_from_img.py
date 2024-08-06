@@ -10,6 +10,14 @@ from . import muscle_sequencing, load_data
 from PIL import Image
 import tkinter.filedialog as fd
 from cmath import inf
+import tkinter.filedialog as fd
+import tkinter as tk
+from tkinter import messagebox
+import cv2
+root = tk.Tk()
+root.attributes("-topmost", True)
+
+
 
 def blob_detection(img, min_sigma, max_sigma, threshold, method=0):
     """This function is mostly used for detecting the beads in any image.
@@ -79,6 +87,52 @@ def count_nearest_pts(src, dst, radius):
             res_t = [res[j] for j in idx_t]
             if res[i] > min(res_t): res[i] = inf
     return res, idx
+
+
+def get_translation():
+    """Obtaining the global translation
+
+    
+    Returns:
+        X and Y coordinates for scaling
+    """
+    file_path_combined = fd.askopenfilename(title = "Choose the combined image ")
+    file_path_fastq = fd.askopenfilename(title = "Choose the fastq image ")
+
+    # Load the images     
+    img_combined = cv2.imread(file_path_combined)
+    img_fastq = cv2.imread(file_path_fastq )
+
+    # Display the original images
+
+    plt.subplot(1, 3, 1)
+    plt.imshow(img_combined, cmap='gray')
+    plt.title('Image 1')
+    plt.axis('off')
+
+    plt.subplot(1, 3, 2)
+    plt.imshow(img_fastq, cmap='gray')
+    plt.title('Image 2')
+    plt.axis('off')
+    plt.show()   
+    
+    cross_corr = cv2.matchTemplate(img_combined, img_fastq, method=cv2.TM_CCORR_NORMED)
+    
+    # Find the maximum correlation value and its location
+    min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(cross_corr)
+    
+    # Display the cross-correlation map
+    plt.imshow(cross_corr, cmap='gray')
+    plt.title('Cross-correlation')
+    plt.colorbar()
+    plt.show()
+
+    print(f'Maximum correlation is at: {max_loc}')
+    
+    return (-max_loc[0], -max_loc[1])
+
+    
+
 
 def combined_image(path_smFRET, POS, ALEX, tr_R2G, apriori_tr_original):
     """Creating the combined image from the sm_FRET FOVs
@@ -180,8 +234,8 @@ def combined_image(path_smFRET, POS, ALEX, tr_R2G, apriori_tr_original):
     img2.save(current_direct+'/Combined.png')
     
     print("combined image is successfully saved")
-    
-    
+  
+
     
     
     

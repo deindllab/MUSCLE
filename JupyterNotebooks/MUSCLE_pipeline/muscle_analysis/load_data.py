@@ -4,7 +4,7 @@ import numpy as np
 import tkinter as tk
 from tkinter import messagebox
 
-
+from . import pks_from_img
 
 
 def poly_transf():
@@ -92,53 +92,11 @@ def extract_pos_info(POS, res = False):
     if res:
         #coords_t_seq = np.array([-2988.2,205.6])
         
-        def combine_numbers_and_exit():
-            try:
-        # Retrieve numbers from the entries
-                num1 = float(entry1.get())
-                num2 = float(entry2.get())   
-                global coords_t_seq
-                coords_t_seq = np.array([num1, num2])
-        
-                
-                 # Exit the main loop
-                root.quit()
-        
-            except ValueError:
-        # Display an error message if input is not valid
-                messagebox.showerror("Invalid input", "Please enter valid numbers.")
-
-        # Create the main window
-        root = tk.Tk()
-        root.attributes("-topmost", True)
-        root.title("Please enter X and Y displacement")
-
-        # Create and place the labels and entry widgets
-        tk.Label(root, text="Enter the X displacement:").grid(row=0, column=0, padx=10, pady=10)
-        entry1 = tk.Entry(root)
-        entry1.grid(row=0, column=1, padx=10, pady=10)
-
-        tk.Label(root, text="Enter the Y displacement:").grid(row=1, column=0, padx=10, pady=10)
-        entry2 = tk.Entry(root)
-        entry2.grid(row=1, column=1, padx=10, pady=10)
-
-        # Create and place the button widget
-        button = tk.Button(root, text="Enter", command=combine_numbers_and_exit)
-        button.grid(row=2, column=0, columnspan=2, pady=10)
-
-        # Run the application
-        root.mainloop()
-
-        # Ensure the application closes properly
-        root.destroy()
-
         
         
-        
-        coords_t_FRET = np.array([0, 0])
         upper_left_um_x = min(posX)
         upper_left_um_y = max(posY)
-        [deltax, deltay] = np.subtract(coords_t_seq,coords_t_FRET)
+        deltax, deltay = pks_from_img.get_translation()
         print(deltax,deltay)
         print(upper_left_um_x, upper_left_um_y)
         labels_res = []
