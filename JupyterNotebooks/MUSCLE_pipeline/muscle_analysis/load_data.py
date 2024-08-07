@@ -36,25 +36,32 @@ def apriori_transf(x_border,y_border):
         apriori_tr - centred transformation 
         apriori_tr_inv - inversed and centred transformation 
     """    
-    apriori_tr_original = transform.SimilarityTransform()
-    apriori_tr_original.params = np.array([[ 5.98278480e-01, -2.04811207e-03,  0],
-     [ 2.04811207e-03,  5.98278480e-01,  0],
-     [ 0.00000000e+00,  0.00000000e+00,  1.00000000e+00]])
-    apriori_tr = transform.SimilarityTransform()
-    apriori_tr.params = np.array([[ 5.98278480e-01, -2.04811207e-03,  0],
-     [ 2.04811207e-03,  5.98278480e-01,  0],
-     [ 0.00000000e+00,  0.00000000e+00,  1.00000000e+00]])
+    
+    FRET_pixel = 204 # nm/pixel
+    Illumina_pixel = 340 #nm/pixel 
+    scale = FRET_pixel/ Illumina_pixel
+    apriori_tr_original = transform.SimilarityTransform(scale = scale)
+    
+    apriori_tr = transform.SimilarityTransform(scale = scale)
+   # apriori_tr_original = transform.SimilarityTransform()
+   # apriori_tr_original.params = np.array([[ 5.98278480e-01, -2.04811207e-03,  0],
+   #  [ 2.04811207e-03,  5.98278480e-01,  0],
+   #  [ 0.00000000e+00,  0.00000000e+00,  1.00000000e+00]])
+   # apriori_tr = transform.SimilarityTransform()
+   # apriori_tr.params = np.array([[ 5.98278480e-01, -2.04811207e-03,  0],
+   #  [ 2.04811207e-03,  5.98278480e-01,  0],
+   #  [ 0.00000000e+00,  0.00000000e+00,  1.00000000e+00]])
 
     # Centering the tranformation to the x_border and y_border
     delta = 0.5*np.subtract([x_border,y_border],apriori_tr([512,256]))
     dx, dy = delta[0]
     apriori_tr.params[0,2] = dx
     apriori_tr.params[1,2] = dy
-    
-    apriori_tr_inv = transform.SimilarityTransform()
-    apriori_tr_inv.params = np.array([[ 1.67127284e+00,  5.72133913e-03,  0],
- [-5.72133913e-03,  1.67127284e+00,  0],
- [ 0.00000000e+00,  0.00000000e+00,  1.00000000e+00]])
+    apriori_tr_inv = transform.SimilarityTransform(scale = 1/scale)
+   # apriori_tr_inv = transform.SimilarityTransform()
+   # apriori_tr_inv.params = np.array([[ 1.67127284e+00,  5.72133913e-03,  0],
+# [-5.72133913e-03,  1.67127284e+00,  0],
+ #[ 0.00000000e+00,  0.00000000e+00,  1.00000000e+00]])
 
      # Centering the tranformation to the x_border and y_border
     delta = 0.5*np.subtract([512,256],apriori_tr_inv([x_border,y_border]))
