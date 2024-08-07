@@ -152,7 +152,7 @@ def combined_image(path_smFRET, POS, ALEX, tr_R2G, apriori_tr_original):
     maxx = max(posX)
     miny = min(posY)
     maxy = max(posY)
-    size = [maxy-miny+50+size1[0,0], maxx-minx+50+size1[0,1]]
+    size = [maxy-miny+50+size1[0,0]*0.34, maxx-minx+50+size1[0,1]*0.34]
     size = np.divide(size,0.34).astype(int)
     img = np.zeros(size)
     counter = 1
