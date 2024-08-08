@@ -1,0 +1,5 @@
+Some experiments involved repeated observations of the same field of view under different conditions (e.g. before and after the addition of dCas9). In these cases, movies obtained under different conditions were concatenated and aligned using ImageJ scripts MUSCLE_multi_condition.ijm or MUSCLE_multi_condition_drift_corr.ijm. The latter script additionally aligns individual frames within each movie to correct the xy drift.
+
+ImageJ scripts expect two movies for each position: a "green" movie containing images for smFRET trace extraction and a "red" movie that contains direct acceptor excitation images. The latter movie is used for alignment since it provides a straightforward overview of construct positions that is not affected by FRET. If imaging was performed using alternating laser excitation (ALEX), a single "green" movie is generated during imaging, and a "red" movie is generated using MUSCLE_ALEX.ijm from the images in the "green" movie that were obtained under direct acceptor excitation.
+
+Please note that these ImageJ scripts require the Template Matching plugin (https://sites.google.com/site/qingzongtseng/template-matching-ij-plugin).

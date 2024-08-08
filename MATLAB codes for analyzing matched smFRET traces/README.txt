@@ -1,0 +1,1 @@
+All MATLAB codes are divided into sections that are designed to be executed one-by-one. Some codes require custom functions, which are located in this folder - change the Current directory to this path.
