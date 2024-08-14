@@ -154,7 +154,7 @@ def alignment (path_smFRET, POS, ALEX, tr_R2G, apriori_tr, x_coord, y_coord, seq
             img_smFRET = io.imread(path_smFRET_file)
 
             # Averaging the first 10 frames to select peaks
-            ALEX = True
+            
             if ALEX:
 #             img_t = np.mean(img_smFRET[green_frames,::], axis = 0)
                 img_t = np.mean(img_smFRET[red_frames,::], axis = 0)
