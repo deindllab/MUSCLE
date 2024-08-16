@@ -101,7 +101,16 @@ def get_translation():
 
     # Load the images     
     img_combined = cv2.imread(file_path_combined)
-    img_fastq = cv2.imread(file_path_fastq )
+    img_fastq = cv2.imread(file_path_fastq) 
+
+    # Subjecting the small part of the template 
+    template_size = 800
+    height, width = img_fastq.shape[:2]
+    start_x = (width - template_size) // 2
+    start_y = (height - template_size) // 2
+    end_x = start_x + template_size
+    end_y = start_y + template_size
+    img_fastq= img_fastq[start_y:end_y, start_x:end_x]
 
     # Display the original images
 
@@ -125,11 +134,12 @@ def get_translation():
     plt.imshow(cross_corr, cmap='gray')
     plt.title('Cross-correlation')
     plt.colorbar()
+    plt.savefig('cross_correlation_map.eps', format='eps', dpi=300, bbox_inches='tight')  # Save as EPS format
     plt.show()
-
-    print(f'Maximum correlation is at: {max_loc}')
     
-    return (-max_loc[0], -max_loc[1])
+    print(-max_loc[0] + start_x, -max_loc[1] + start_y)
+    
+    return (-max_loc[0] + start_x, -max_loc[1] + start_y)
 
     
 
