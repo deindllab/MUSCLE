@@ -209,7 +209,7 @@ def combined_image(path_smFRET, POS, ALEX, tr_R2G, apriori_tr_original):
         if show_im:
             fig, ax = plt.subplots()
             ax.imshow(combined)
-        blobs_log = blob_log(combined, max_sigma=10, num_sigma=10, threshold=30) # Was 1000 for 19/07/2022
+        blobs_log = blob_log(combined, max_sigma=10, num_sigma=10, threshold=300) # Was 1000 for 19/07/2022
     #             Was 300 for 06/09/2022
         CM = []
         r = 3
@@ -238,6 +238,7 @@ def combined_image(path_smFRET, POS, ALEX, tr_R2G, apriori_tr_original):
 
         img[id1:id1+size1[0,0],id2:id2+size1[0,1]] = smFRET_centers_tr_image_array
         counter = counter + 1
+        show_im = False
     img2 = Image.fromarray(img.astype(np.byte))
     img2 = img2.convert('L')
     current_direct = fd.askdirectory(title = "Choose the output folder")

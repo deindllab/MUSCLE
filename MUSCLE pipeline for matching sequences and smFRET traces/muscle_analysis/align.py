@@ -75,9 +75,12 @@ def alignment (path_smFRET, POS, ALEX, tr_R2G, apriori_tr, x_coord, y_coord, seq
     good_pos = []
     matched_sequences = []
     matched_centers_red = []
+    matched_centers_red_tr = []
     matched_centers_green = []
     matched_centers_FQ = []
     matched_dist = []
+    all_centers_red = []
+    all_FASTQ = []
     processed_pos = []
     FQ_shifts = []
     FQ_shifts_pos = []
@@ -171,7 +174,7 @@ def alignment (path_smFRET, POS, ALEX, tr_R2G, apriori_tr, x_coord, y_coord, seq
             combined = red + green # Consider adding the red excitation channel, though there are some difficulties, e.g. beads and int scaling
             fig, ax = plt.subplots()
             ax.imshow(combined)
-            blobs_log = blob_log(combined, max_sigma=10, num_sigma=10, threshold=30) # Was 1000 for 19/07/2022
+            blobs_log = blob_log(combined, max_sigma=10, num_sigma=10, threshold=300) # Was 1000 for 19/07/2022
     #             Was 300 for 06/09/2022
             CM = []
             #r = 3
@@ -276,6 +279,9 @@ def alignment (path_smFRET, POS, ALEX, tr_R2G, apriori_tr, x_coord, y_coord, seq
             if read2:
                 matched_sequences_2.append(seq_matched_2)
             matched_centers_red.append(centers_red)
+            matched_centers_red_tr.append(tr(centers_red))
+            all_centers_red.append(tr(smFRET_centers))
+            all_FASTQ.append(FQ_centers)
             matched_centers_green.append(centers_green)
             matched_dist.append(distances_matched)
             matched_centers_FQ.append(FQ_centers_matched)
@@ -349,9 +355,12 @@ def alignment (path_smFRET, POS, ALEX, tr_R2G, apriori_tr, x_coord, y_coord, seq
         "matched_sequences": matched_sequences,
         "matched_sequences_2": matched_sequences_2,
         "matched_centers_red": matched_centers_red,
+        "matched_centers_red_tr": matched_centers_red_tr,
         "matched_centers_green": matched_centers_green,
         "matched_distances": matched_dist,
         "matched_FASTQ": matched_centers_FQ,
+        "all_centers_red_tr": all_centers_red,
+        "all_FASTQ": all_FASTQ,
         "FASTQ_shifts": FQ_shifts
     }
 
