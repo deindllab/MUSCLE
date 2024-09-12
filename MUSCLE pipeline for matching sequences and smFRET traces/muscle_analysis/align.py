@@ -36,7 +36,87 @@ root = tk.Tk()
 root.attributes("-topmost", True)
 root.withdraw()
 
-def alignment (path_smFRET, POS, ALEX, tr_R2G, apriori_tr, x_coord, y_coord, sequence, read2 ):
+def peaks_treshold (path_smFRET, POS, ALEX, tr_R2G, apriori_tr ):
+    if ALEX:
+        green_frames = np.add(1,np.multiply(2,range(10)))
+        red_frames = np.subtract(green_frames,1)
+    x_border = 500
+    y_border = 300
+    counter = 0  
+    rb_rad = int(input("Please enter the radius for the rolling ball background estimation, put 10 as a default "))
+    rb = int(rb_rad/2) # Half-width of the background aperture for trace extraction
+    r = int(input("Please enter the half-width of the molecule aperture for trace extraction, , i.e. for r = 3 it is -3:3"))
+    
+       
+    flag = True
+    labels = [P['LABEL'] for P in POS]
+    print(labels[3])
+    #r = 3 # Half-width of the molecule aperture for trace extraction, i.e. for r = 3 it is -3:3
+    #rb = 5 # Half-width of the background aperture for trace extraction 
+    pos = labels [3]
+    if os.path.exists(os.path.join(path_smFRET,pos,'B_Green','img_000000000.tiff')):
+        path_smFRET_file = os.path.join(path_smFRET,pos,'B_Green','img_000000000.tiff')
+    elif os.path.exists(os.path.join(path_smFRET,pos,'B_hairpinGreen','img_000000000.tiff')):
+        path_smFRET_file = os.path.join(path_smFRET,pos,'B_hairpinGreen','img_000000000.tiff')
+    elif os.path.exists(os.path.join(path_smFRET,pos,'B_Green_hairpin','img_000000000.tiff')):
+        path_smFRET_file = os.path.join(path_smFRET,pos,'B_Green_hairpin','img_000000000.tiff')
+    elif os.path.exists(os.path.join(path_smFRET,pos,'B_Green_Normal','img_000000000.tiff')):
+        path_smFRET_file = os.path.join(path_smFRET,pos,'B_Green_Normal','img_000000000.tiff')
+    
+   
+       
+    img_smFRET = io.imread(path_smFRET_file)
+                # Averaging the first 10 frames to select peaks
+
+    if ALEX:
+    #             img_t = np.mean(img_smFRET[green_frames,::], axis = 0)
+        img_t = np.mean(img_smFRET[red_frames,::], axis = 0)
+    else:
+        img_t = np.mean(img_smFRET[0:10,::], axis = 0)         
+    img_t = img_t.astype("ushort")
+
+
+    red = img_t[256:,:]
+    green = img_t[:256,:]
+    red = red - rolling_ball(red, radius=rb_rad)
+    green = green - rolling_ball(green, radius=rb_rad)
+    green = transform.warp(green,tr_R2G, preserve_range = True)
+
+    combined = red + green # Consider adding the red excitation channel, though there are some difficulties, e.g. beads and int scaling
+    while flag:
+            thr = int(input("Please, choose the treshold, default value 300: "))
+            fig, ax = plt.subplots()
+            ax.imshow(combined)
+            blobs_log = blob_log(combined, max_sigma=10, num_sigma=10, threshold=thr) # Was 1000 for 19/07/2022
+        #             Was 300 for 06/09/2022
+            CM = []
+                #r = 3
+            [h,w] = red.shape
+            n_frames = img_smFRET.shape[0]
+         
+            for i, blob in enumerate(blobs_log):
+                x, y, d = blob
+                if x>r and x<(h-r) and y>r and y<(w-r):
+                    temp = ndimage.measurements.center_of_mass(combined[int(x-r):int(x+r+1),int(y-r):int(y+r+1)])
+                    CM.append(np.flip(np.add(temp, [x-r,y-r])))
+
+                    c = plt.Circle(CM[-1], 3, color="red", linewidth=1, fill=False)
+                    ax.add_patch(c)
+            ax.set_axis_off()
+           
+            plt.show()
+
+            check = input("Please type y if threshold is good enough: ").lower()
+            if check == "y":
+                flag = False 
+                    
+    return (thr)
+
+
+
+
+
+def alignment (path_smFRET, POS, ALEX, tr_R2G, apriori_tr, x_coord, y_coord, sequence, read2, tr = 300 ):
     """
     The function is used for the alingment between molecules from smFRET imaging and clusters from sequencing.
 
@@ -50,6 +130,7 @@ def alignment (path_smFRET, POS, ALEX, tr_R2G, apriori_tr, x_coord, y_coord, seq
         y_coord: list of the y coordinates from the FASTQ file
         sequence: list of the sequences from the FASTQ file, in case of paired-end sequencing, it is 2D array
         read2: in case of paired-end sequencing, this flag should be True
+        tr: smFRET image threshold, 300 by default 
     Returns:
          It returns the following analysis parameters that can be adjusted in this file if needed: 
          r - Half-width of the molecule aperture for trace extraction, i.e. for r = 3 it is -3:3
@@ -174,7 +255,7 @@ def alignment (path_smFRET, POS, ALEX, tr_R2G, apriori_tr, x_coord, y_coord, seq
             combined = red + green # Consider adding the red excitation channel, though there are some difficulties, e.g. beads and int scaling
             fig, ax = plt.subplots()
             ax.imshow(combined)
-            blobs_log = blob_log(combined, max_sigma=10, num_sigma=10, threshold=300) # Was 1000 for 19/07/2022
+            blobs_log = blob_log(combined, max_sigma=10, num_sigma=10, threshold=tr) # Was 1000 for 19/07/2022
     #             Was 300 for 06/09/2022
             CM = []
             #r = 3

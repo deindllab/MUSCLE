@@ -144,7 +144,7 @@ def get_translation():
     
 
 
-def combined_image(path_smFRET, POS, ALEX, tr_R2G, apriori_tr_original):
+def combined_image(path_smFRET, POS, ALEX, tr_R2G, apriori_tr_original, tr = 300):
     """Creating the combined image from the sm_FRET FOVs
 
     Args:
@@ -153,6 +153,7 @@ def combined_image(path_smFRET, POS, ALEX, tr_R2G, apriori_tr_original):
         ALEX (bool): was the data collected using alternating laser excitation (ALEX)?.
         tr_R2G: the polynomial reverse transformation for mapping the Cy3 and Cy5 channels
         apriori_tr_original: original apriori transformation from smFRET to sequencing coordinates
+        tr: smFRET image threshold, 300 by default 
     Returns:
         The function creates an image that combines all smFRET FOVs in order to perform preliminary alignment with FASTQ tiles
     """
@@ -209,7 +210,7 @@ def combined_image(path_smFRET, POS, ALEX, tr_R2G, apriori_tr_original):
         if show_im:
             fig, ax = plt.subplots()
             ax.imshow(combined)
-        blobs_log = blob_log(combined, max_sigma=10, num_sigma=10, threshold=300) # Was 1000 for 19/07/2022
+        blobs_log = blob_log(combined, max_sigma=10, num_sigma=10, threshold=tr) # Was 1000 for 19/07/2022
     #             Was 300 for 06/09/2022
         CM = []
         r = 3

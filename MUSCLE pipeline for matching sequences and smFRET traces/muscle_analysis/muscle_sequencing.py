@@ -189,12 +189,14 @@ def scaling_seq (x, y):
     
     return (x,y)
 
-def create_FASTQ_image (current_tile, read2):
+def create_FASTQ_image (current_tile, read2, seq, seq_threshold):
     """This function is used for creating the image based on FASTQ file. 
 
     Args:
         current tile(integer): number of the current tile
         read2(boolean):  in case of paired-end sequencing, this flag should be True
+        seq(string): template library sequence for selecting library constructs
+        seq_threshold(integer): the threshold for a number of matches between a read and the template for selecting library constructs
     Returns:
        Creates the fastq image 
        x_coord - x coordinates from the Fastq file 
@@ -219,11 +221,11 @@ def create_FASTQ_image (current_tile, read2):
     
     # Selecting the library sequences for further analysis, insert here the sequence of your library 
     # Hairpin library:
-    library_seq =  'GGTCTCGTCCATGGCGACGGCAGCGAGGCGAATGGCGGTTAAAAAAAAAAAAAAAAATGCCCTCCACGAT' 
+    library_seq =  seq
     # Cas9 library:    
     #library_seq =  'GGTCTCGCACAGCAGAAATCTCTACTGAGGTATAAAGATGAGACGCTGGAGTAAAAACGTTGGTTGGCT'
     
-    idx = library_index(library_seq, sequence_1, 40)
+    idx = library_index(library_seq, sequence_1, seq_threshold)
     x_coord = [x_coord[i] for i in idx]
     y_coord = [y_coord[i] for i in idx]
     sequence_1 = [sequence_1[i] for i in idx] 
