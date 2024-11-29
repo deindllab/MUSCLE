@@ -116,7 +116,7 @@ def peaks_treshold (path_smFRET, POS, ALEX, tr_R2G, apriori_tr ):
 
 
 
-def alignment (path_smFRET, POS, ALEX, tr_R2G, apriori_tr, x_coord, y_coord, sequence, read2, tr = 300 ):
+def alignment (path_smFRET, POS, ALEX, tr_R2G, apriori_tr, x_coord, y_coord, sequence, read2, thr = 300 ):
     """
     The function is used for the alingment between molecules from smFRET imaging and clusters from sequencing.
 
@@ -255,7 +255,7 @@ def alignment (path_smFRET, POS, ALEX, tr_R2G, apriori_tr, x_coord, y_coord, seq
             combined = red + green # Consider adding the red excitation channel, though there are some difficulties, e.g. beads and int scaling
             fig, ax = plt.subplots()
             ax.imshow(combined)
-            blobs_log = blob_log(combined, max_sigma=10, num_sigma=10, threshold=tr) # Was 1000 for 19/07/2022
+            blobs_log = blob_log(combined, max_sigma=10, num_sigma=10, threshold=thr) # Was 1000 for 19/07/2022
     #             Was 300 for 06/09/2022
             CM = []
             #r = 3
